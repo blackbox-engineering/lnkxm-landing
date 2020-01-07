@@ -152,8 +152,6 @@ body {
 	font-family: lores-12, sans-serif !important;
 }
 .input-group button:hover {
-	width: 60%;
-	vertical-align: top;
 	border: 1px solid white;
 	color: white;
 	background: #0022ff;

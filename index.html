@@ -36,6 +36,8 @@
   <link rel="stylesheet" href="https://use.typekit.net/bpv5trt.css">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
 </head>
 
 <body id="landing-page" class="landing-page">
@@ -57,7 +59,7 @@
             <div class="hr4"></div>
             <div class="hr5"></div>
             <div class="hr6"></div>
-            <div class="header-box"></div>
+            <div class="header-box-outer"><div class="header-box"></div></div>
      		<div class="header-title">LNK XM</div>
      	  </div>
           <div class="row second-modal-header">
@@ -65,49 +67,99 @@
      				4 items
             </div>
             <div class="col-6 text-center no-vertical-margin mt-5">
-                	By GeoCities
+                	Electronic Message
             </div>
      	  </div>
      	  <div class="sub-header-hr"></div>
      	  <div class="modal-inner-body">
      	  	<div class="row input-row">
-     	  		<div class="col-6">
-     	  			<div class="input-group">
-         	  			<label>name* </label>
-         	  			<input></input>
-         	  		</div>
-         	  		<div class="input-group">
-         	  			<label>e-mail* </label>
-         	  			<input></input>
-         	  		</div>
-         	  		<div class="input-group">
-         	  			<label>phone* </label>
-         	  			<input></input>
-         	  		</div>
-     	  		</div>
-     	  		<div class="col-6">
-     	  			<div class="input-group">
-         	  			<label>message* </label>
-         	  			<textarea></textarea>
-         	  		</div>
-         	  	</br>
-         	  		<div class="input-group mt-5">
-         	  			<label>submit* </label>
-         	  			<button class="btn">button</button>
-         	  		</div>
-     	  		</div>
+            <form action="https://formcarry.com/s/4sgMmCNaTxq" method="POST" accept-charset="UTF-8" id="formcarry-form" >
+              <div class="col-6">
+                <div class="input-group">
+                    <input hidden="true" name="source" value="lnkxm"></input>
+                    <label>name* </label>
+                    <input placeholder="Name" name="name" type="text" tabindex="1" class="form-control" required></input>
+                  </div>
+                  <div class="input-group">
+                    <label>e-mail* </label>
+                    <input placeholder="Email" name="email" type="email" tabindex="2" class="form-control"  required></input>
+                  </div>
+                  <div class="input-group">
+                    <label>phone* </label>
+                    <input placeholder="Phone" name="phone" type="tel" tabindex="3" class="form-control"  required></input>
+                  </div>
+              </div>
+              <div class="col-6">
+                <div class="input-group">
+                    <label>message* </label>
+                    <textarea placeholder="Message" name="Message" tabindex="4" required></textarea>
+                  </div>
+                </br>
+                  <div class="input-group mt-5">
+                    <label>submit* </label>
+                    <button type="submit" class="btn" id="contact-submit">execute</button>
+                  </div>
+              </div>
+            </form>
      	  	</div>
      	  </div>
      	  <div class="modal-bottom-row"></div>
      	</div>
-      </div>
       <div class="col-1"></div>
+    </div>
+  </div>
+
+
+
+
+
+    <div class="row alert-box" style="z-index: 1000;display:none;">
+      <div class="col-3">
+      </div>
+      <div class="col-6">
+        <div class="modal-body">
+     	  <div class="modal-header">
+            <div class="hr1"></div>
+            <div class="hr2"></div>
+            <div class="hr3"></div>
+            <div class="hr4"></div>
+            <div class="hr5"></div>
+            <div class="hr6"></div>
+            <div class="header-title-alert">LNK XM</div>
+     	  </div>
+     	  <div class="text-center alert-body">
+          excellent</br>
+          <img src="assets/img/dancing.gif" id="logo-holder" class="logo" alt="process 2" />
+     	  </div>
+     	</div>
+      <div class="col-3"></div>
     </div>
   </div>
   <script>
   	var logos = ["assets/img/logo0.png","assets/img/logo1.png","assets/img/logo2.png","assets/img/logo3.png","assets/img/logo4.png","assets/img/logo5.png","assets/img/logo6.png","assets/img/logo7.png","assets/img/logo8.png","assets/img/logo9.png","assets/img/logo11.png"]
   	var logo = logos[Math.floor(Math.random()*logos.length)];
   	document.getElementById("logo-holder").src = logo;
+  </script>
+
+  <script>
+    $("#formcarry-form").submit(function(event){
+      event.preventDefault()
+      event.stopPropagation()
+      var href = $(this).attr("action");
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: href,
+        data: $(this).serialize(),
+        success: function(response){
+          if(response.status == "success"){
+            $(".alert-box").show()
+          }else{
+						alert("An error occured." + response.message);
+          }
+        }
+      });
+    });
   </script>
 </body>
 </html>
